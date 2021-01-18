@@ -1,16 +1,27 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: fluentd-psp
+  name: privileged
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
 spec:
   privileged: true
-  seLinux:
-    rule: RunAsAny
-  supplementalGroups:
-    rule: RunAsAny
-  runAsUser:
-    rule: RunAsAny
-  fsGroup:
-    rule: RunAsAny
+  allowPrivilegeEscalation: true
+  allowedCapabilities:
+  - '*'
   volumes:
   - '*'
+  hostNetwork: true
+  hostPorts:
+  - min: 0
+    max: 65535
+  hostIPC: true
+  hostPID: true
+  runAsUser:
+    rule: 'RunAsAny'
+  seLinux:
+    rule: 'RunAsAny'
+  supplementalGroups:
+    rule: 'RunAsAny'
+  fsGroup:
+    rule: 'RunAsAny'
