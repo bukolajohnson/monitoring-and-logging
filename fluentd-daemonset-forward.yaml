@@ -20,7 +20,7 @@ rules:
   resources:
   - pods
   - namespaces
-  - PodSecurityPolicies
+  - podsecuritypolicies
   verbs:
   - get
   - list
