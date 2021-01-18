@@ -3,6 +3,8 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  labels:
+    app: fluentd-logging
   name: fluentd-service-account
   namespace: kube-system
 
@@ -10,7 +12,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: fluentd-service-account
+  name: fluentd-clusterrole
   namespace: kube-system
 rules:
 - apiGroups:
@@ -31,10 +33,10 @@ rules:
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: fluentd-service-account
+  name: fluentd-clusterrole
 roleRef:
   kind: ClusterRole
-  name: fluentd-service-account
+  name: fluentd-clusterrole
   apiGroup: rbac.authorization.k8s.io
 subjects:
 - kind: ServiceAccount
