@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: fluentd-logging
+  name: fluentd
   namespace: kube-system
   labels:
-    app: fluentd-logging
+    app: fluentd
 data:
   fluent.conf: |
     <source>
