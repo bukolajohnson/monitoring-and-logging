@@ -18,7 +18,7 @@ metadata:
   namespace: kube-system
 rules:
 - apiGroups:
-  - policy
+  - " "
   resourceNames:
   - fluentd-psp
   resources:
