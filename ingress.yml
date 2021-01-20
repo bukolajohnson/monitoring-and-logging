@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+spec:
+  tls:
+    - hosts:
+      - grafana-test-cluster.k9s.a9s-ops.de
+  rules:
+  - host: grafana-apps-test-cluster.k9s.a9s-ops.de
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: grafana
+          servicePort: 3000
