@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: loki
+  name: loki-sa
+  namespace: monitoring
+secrets:
+- name: default-token-zx74d
