@@ -6,7 +6,7 @@ metadata:
 spec:
   tls:
     - hosts:
-      - grafana-test-cluster.k9s.a9s-ops.de
+      - grafana-apps-test-cluster.k9s.a9s-ops.de
   rules:
   - host: grafana-apps-test-cluster.k9s.a9s-ops.de
     http:
@@ -15,3 +15,10 @@ spec:
         backend:
           serviceName: grafana
           servicePort: 3000
+  - host: loki-apps-test-cluster.k9s.a9s-ops.de
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: loki
+          servicePort: 3100
