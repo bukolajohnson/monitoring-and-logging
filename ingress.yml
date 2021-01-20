@@ -4,8 +4,11 @@ metadata:
   name: grafana-ingress
   namespace: monitoring
 spec:
+  tls:
+    - hosts:
+      - grafana-test-cluster.k9s.a9s-ops.de
   rules:
-  - host: grafana.test-cluster.k9s.a9s-ops.de
+  - host: grafana-apps-test-cluster.k9s.a9s-ops.de
     http:
       paths:
       - path: /
