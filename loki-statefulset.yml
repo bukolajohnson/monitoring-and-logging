@@ -6,7 +6,7 @@ metadata:
   labels:
     app: loki
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: loki
@@ -50,11 +50,11 @@ spec:
         volumeMounts:
         - mountPath: /etc/loki
           name: config
-        - mountPath: /var/vcap/data/loki
-          name: loki-storage
-        # - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-        #   name: loki-token-q8thq
-          # readOnly: true
+        - mountPath: /data
+          name: storage
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: loki-token-q8thq
+          readOnly: true
       securityContext:
         fsGroup: 10001
         runAsGroup: 10001
@@ -66,12 +66,11 @@ spec:
         secret:
           defaultMode: 420
           secretName: loki
-      - name: loki-storage
-        emptyDir: {}
-
-      # - emptyDir: {}
-      #   name: storage
-      # - name: loki-token-q8thq
-        # secret:
-        #   defaultMode: 420
-        #   secretName: loki-token-q8thq
+      - hostPath:
+          path: /var/vcap/data/loki-data
+          type: DirectoryOrCreate
+        name: storage
+      - name: loki-token-q8thq
+        secret:
+          defaultMode: 420
+          secretName: loki-token-q8thq
