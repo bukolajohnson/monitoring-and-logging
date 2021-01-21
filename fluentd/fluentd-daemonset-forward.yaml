@@ -29,6 +29,12 @@ spec:
       containers:
       - name: fluentd
         image: fluent/fluentd-kubernetes-daemonset:v1.4-debian-forward-1
+        command:
+          - /bin/sh
+          - '-c'
+          - >
+            fluent-gem i fluent-plugin-grafana-loki-licence-fix ;
+            tini /fluentd/entrypoint.sh;
         securityContext:
           privileged: true
         resources:
