@@ -51,6 +51,7 @@ data:
 
       <record>
         app ${ record.dig("kubernetes", "labels", "app") }
+        env ${ record.dig("kubernetes", "labels", "env") }
         job ${ record.dig("kubernetes", "labels", "app") }
         namespace ${ record.dig("kubernetes", "namespace_name") }
         pod ${ record.dig("kubernetes", "pod_name") }
@@ -65,7 +66,7 @@ data:
         @type loki
         url "http://loki.monitoring.svc.cluster.local:3100"
         # extra_labels {"env":"dev"}
-        label_keys "app,job,namespace,pod"
+        label_keys "app,job,namespace,pod,env,container"
         flush_interval 10s
         flush_at_shutdown true
         buffer_chunk_limit 1m
