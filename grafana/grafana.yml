@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: grafana/grafana:latest
+        image: grafana/grafana
         ports:
         - name: grafana
           containerPort: 3000
@@ -30,13 +30,15 @@ spec:
             cpu: "500m"
         volumeMounts:
           - mountPath: /var/vcap/data/grafana
-            name: grafana-storage
-          - mountPath: /etc/grafana/provisioning/datasources
+            name: grafana-persistent-storage-store
+          - mountPath: /etc/grafana/provisioning/datasources/datasource.yml
             name: grafana-datasources
+            subPath: datasource.yaml
             readOnly: false
       volumes:
-        - name: grafana-storage
-          emptyDir: {}
+        - name: grafana-persistent-storage-store
+          persistentVolumeClaim:
+            claimName: grafana-storage-pvc
         - name: grafana-datasources
           configMap:
               defaultMode: 420
