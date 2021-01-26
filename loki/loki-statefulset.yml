@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - args:
-        - -config.file=/etc/loki/loki.yaml
+        - -config.file=/etc/loki/loki.yml
         name: loki
         image: grafana/loki:2.0.0
         livenessProbe:
@@ -48,8 +48,9 @@ spec:
         securityContext:
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /etc/loki
-          name: config
+        - mountPath: /etc/loki/loki.yml
+          name: loki-config
+          subPath: loki.yml
         - mountPath: /data
           name: storage
         - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
@@ -66,6 +67,10 @@ spec:
         secret:
           defaultMode: 420
           secretName: loki
+      - name: loki-config
+        configMap:
+          defaultMode: 420
+          name: loki-config
       - hostPath:
           path: /var/vcap/data/loki-data
           type: DirectoryOrCreate
