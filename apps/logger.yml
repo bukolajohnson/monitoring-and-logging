@@ -5,7 +5,7 @@ metadata:
   labels:
     app: random-logger
 spec:
-  replicas: 1
+  replicas: 50
   selector:
     matchLabels:
       app: random-logger

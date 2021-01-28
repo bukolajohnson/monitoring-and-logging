@@ -65,7 +65,7 @@ data:
         @type loki
         url "http://loki.monitoring.svc.cluster.local:3100"
         # extra_labels {"env":"dev"}
-        label_keys "app,job,namespace,pod"
+        label_keys "app,job,namespace,pod,container"
         flush_interval 10s
         flush_at_shutdown true
         buffer_chunk_limit 1m
